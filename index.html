@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>拼图游戏</title>
+		<style type="text/css">
+			body {
+				background-color: lightblue;
+			}
+
+			.demo {
+				border: 1px solid #000;
+				margin: 10px 100px;
+				background-color: #e4e4e4;
+			}
+			
+			.preview {
+				border: 1px solid #000;
+				width: 300px;
+				position: absolute;
+				top: 100px;
+				right: 300px;
+				overflow: hidden;
+			}
+			
+			.preview img {
+				width: 100%;
+				display: block;
+			}
+			
+			.title span {
+				position: relative;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="title">
+			拼图游戏
+		</div>
+		<div class="demo"></div>
+		<div class="preview"><img src="img/1.jpg" /></div>
+		<script src="js/jquery-2.1.0.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/gridPic.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/drag.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/puzzle.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var imgs = [];
+			for(var i = 0; i < 5; i++) {
+				imgs.push(i + 1 + ".jpg");
+			}
+			var settings = {
+				columns: 4,
+				img: "1.jpg",
+				height: 450
+			};
+			//初始化
+			settings.img = imgs[Math.floor(Math.random() * imgs.length)];
+			$(".demo").puzzle(".demo");
+			$(".difficulty").html(settings.columns);
+			//切换图片、缩放缩略图
+			$(".preview").dblclick(function() {
+				settings.img = imgs[Math.floor(Math.random() * imgs.length)];
+				$(".demo").puzzle(".demo");
+			}).drag(null,true)
+		</script>
+	</body>
+
+</html>
